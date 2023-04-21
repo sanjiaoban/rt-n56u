@@ -1644,8 +1644,8 @@ ej_wl_auth_list(int eid, webs_t wp, int argc, char **argv)
 }
 
 
-#define SSURV_LINE_LEN		(4+33+20+23+9+12+7+3)		// Channel+SSID+Bssid+Security+Signal+WiressMode+ExtCh+NetworkType
-#define SSURV_LINE_LEN_WPS	(4+33+20+23+9+7+7+3+4+5)	// Channel+SSID+Bssid+Security+Signal+WiressMode+ExtCh+NetworkType+WPS+PIN
+#define SSURV_LINE_LEN		(4+73+20+23+9+12+7+3)		// Channel+SSID+Bssid+Security+Signal+WiressMode+ExtCh+NetworkType
+#define SSURV_LINE_LEN_WPS	(4+73+20+23+9+7+7+3+4+5)	// Channel+SSID+Bssid+Security+Signal+WiressMode+ExtCh+NetworkType+WPS+PIN
 
 #if BOARD_HAS_5G_RADIO
 int
@@ -1653,15 +1653,15 @@ ej_wl_scan_5g(int eid, webs_t wp, int argc, char **argv)
 {
 	int retval = 0;
 	int apCount = 0;
-	char data[8192];
-	char ssid_str[128];
+	char data[16384];
+	char ssid_str[256];
 #if defined (USE_WSC_WPS)
 	char site_line[SSURV_LINE_LEN_WPS+1];
 #else
 	char site_line[SSURV_LINE_LEN+1];
 #endif
 	char site_chnl[4];
-	char site_ssid[34];
+	char site_ssid[74];
 	char site_bssid[24];
 	char site_signal[10];
 	struct iwreq wrq;
@@ -1711,13 +1711,13 @@ ej_wl_scan_5g(int eid, webs_t wp, int argc, char **argv)
 			memcpy(site_line, sp, line_len);
 
 			memcpy(site_chnl, sp, 3);
-			memcpy(site_ssid, sp+4, 33);
-			memcpy(site_bssid, sp+37, 20);
-			memcpy(site_signal, sp+80, 9);
+			memcpy(site_ssid, sp+4, 73);
+			memcpy(site_bssid, sp+77, 20);
+			memcpy(site_signal, sp+120, 9);
 
 			site_line[line_len] = '\0';
 			site_chnl[3] = '\0';
-			site_ssid[33] = '\0';
+			site_ssid[73] = '\0';
 			site_bssid[20] = '\0';
 			site_signal[9] = '\0';
 			
@@ -1754,15 +1754,15 @@ int
 ej_wl_scan_2g(int eid, webs_t wp, int argc, char **argv)
 {
 	int retval = 0, apCount = 0;
-	char data[8192];
-	char ssid_str[128];
+	char data[16384];
+	char ssid_str[256];
 #if (defined (USE_WSC_WPS) || defined(USE_RT3352_MII))
 	char site_line[SSURV_LINE_LEN_WPS+1];
 #else
 	char site_line[SSURV_LINE_LEN+1];
 #endif
 	char site_chnl[4];
-	char site_ssid[34];
+	char site_ssid[74];
 	char site_bssid[24];
 	char site_signal[10];
 	struct iwreq wrq;
@@ -1811,13 +1811,13 @@ ej_wl_scan_2g(int eid, webs_t wp, int argc, char **argv)
 			memcpy(site_line, sp, line_len);
 
 			memcpy(site_chnl, sp, 3);
-			memcpy(site_ssid, sp+4, 33);
-			memcpy(site_bssid, sp+37, 20);
-			memcpy(site_signal, sp+80, 9);
+			memcpy(site_ssid, sp+4, 73);
+			memcpy(site_bssid, sp+77, 20);
+			memcpy(site_signal, sp+120, 9);
 
 			site_line[line_len] = '\0';
 			site_chnl[3] = '\0';
-			site_ssid[33] = '\0';
+			site_ssid[73] = '\0';
 			site_bssid[20] = '\0';
 			site_signal[9] = '\0';
 			
