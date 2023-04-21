@@ -1695,9 +1695,9 @@ ej_wl_scan_5g(int eid, webs_t wp, int argc, char **argv)
 	}
 
 #if defined (USE_WSC_WPS)
-	line_len = SSURV_LINE_LEN_WPS;
+	line_len = SSURV_LINE_LEN_WPS + 1;
 #else
-	line_len = SSURV_LINE_LEN;
+	line_len = SSURV_LINE_LEN + 1;
 #endif
 
 	retval += websWrite(wp, "[");
