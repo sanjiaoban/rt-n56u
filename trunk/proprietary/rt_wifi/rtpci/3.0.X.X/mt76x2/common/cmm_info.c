@@ -2623,7 +2623,7 @@ PSTRING GetAuthMode(CHAR auth)
         		3.) UI needs to prepare at least 4096bytes to get the results
     ==========================================================================
 */
-#define	LINE_LEN	(4+33+20+23+9+12+7+3)	/* Channel+SSID+Bssid+Security+Signal+WiressMode+ExtCh+NetworkType*/
+#define	LINE_LEN	(4+73+20+23+9+12+7+3)	/* Channel+SSID+Bssid+Security+Signal+WiressMode+ExtCh+NetworkType*/
 #ifdef AIRPLAY_SUPPORT
 #define IS_UNICODE_SSID_LEN  (4)
 #endif /* AIRPLAY_SUPPORT */
@@ -2669,10 +2669,10 @@ VOID	RTMPCommSiteSurveyData(
 #endif /* AIRPLAY_SUPPORT */
 		
 		sprintf(Ssid, "0x");
-		for (idx = 0; (idx < 15) && (idx < pBss->SsidLen); idx++)
+		for (idx = 0; (idx < (MAX_LEN_OF_SSID-2)/2) && (idx < pBss->SsidLen); idx++)
 			sprintf(Ssid + 2 + (idx*2), "%02X", (UCHAR)pBss->Ssid[idx]);
 	}
-		sprintf(msg+strlen(msg),"%-33s", Ssid);
+		sprintf(msg+strlen(msg),"%-73s", Ssid);
 
 #ifdef AIRPLAY_SUPPORT
 	/* IsUniCode SSID */
