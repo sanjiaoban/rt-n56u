@@ -4,5 +4,5 @@
 # YK-L1   # YOUKU YK-L1     # MT7620  #
 ##################################################################
 
-CFLAGS += -DBOARD_YK_L1
+CFLAGS += -DBOARD_YK_L1 -DVENDOR_YOUKU
 BOARD_NUM_USB_PORTS=1
